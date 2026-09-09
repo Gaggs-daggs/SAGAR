@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAGAR-NODE | Environmental Monitor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div><p class="kicker">FIELD PROTOTYPE / 01</p><h1>SAGAR-NODE</h1><p class="subtitle">Autonomous Environmental Monitoring Prototype</p></div>
+      <div class="connection"><span class="status-dot" id="status-dot"></span><span>CONNECTION</span><strong>USB SERIAL</strong><small>115200 baud</small></div>
+    </header>
+    <section class="status-strip"><div><span class="label">SYSTEM STATUS</span><strong id="system-status">OFFLINE</strong></div><div><span class="label">ESP32</span><strong id="esp-status">OFFLINE</strong></div><div><span class="label">LAST UPDATE</span><strong id="last-update">Awaiting data</strong></div><div class="mode"><span class="label">SYSTEM MODE</span><strong id="system-mode">NORMAL</strong></div></section>
+    <section class="metrics" aria-label="Live sensor readings">
+      <article class="metric"><span class="metric-label">AIR TEMPERATURE</span><strong id="temperature">--</strong><span>degrees C</span></article>
+      <article class="metric"><span class="metric-label">HUMIDITY</span><strong id="humidity">--</strong><span>percent RH</span></article>
+      <article class="metric"><span class="metric-label">ATMOSPHERIC PRESSURE</span><strong id="pressure">--</strong><span>hPa</span></article>
+      <article class="metric turbidity" id="turbidity-card"><span class="metric-label">TURBIDITY SENSOR READING</span><strong id="turbidity">--</strong><span>raw ADC</span></article>
+      <article class="metric"><span class="metric-label">TURBIDITY VOLTAGE</span><strong id="turbidity-voltage">--</strong><span>volts at GPIO34</span></article>
+      <article class="metric"><span class="metric-label">DISTANCE / WATER LEVEL</span><strong id="distance">--</strong><span id="distance-unit">cm</span></article>
+    </section>
+    <div class="alert" id="alert" hidden>Significant turbidity change detected. Demonstration alert active.</div>
+    <section class="charts">
+      <div class="section-heading"><div><p class="kicker">LIVE TELEMETRY</p><h2>Sensor history</h2></div><span>Rolling window / 60 readings</span></div>
+      <div class="chart-grid"><div class="chart"><h3>Temperature <small>degrees C</small></h3><canvas id="temperature-chart"></canvas></div><div class="chart"><h3>Humidity <small>percent</small></h3><canvas id="humidity-chart"></canvas></div><div class="chart"><h3>Pressure <small>hPa</small></h3><canvas id="pressure-chart"></canvas></div><div class="chart"><h3>Turbidity <small>ADC</small></h3><canvas id="turbidity-chart"></canvas></div></div>
+    </section>
+    <footer>Wired USB prototype. Turbidity values are comparative raw ADC readings, not calibrated NTU. HC-SR04 is a distance demonstration only.</footer>
+  </main>
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
