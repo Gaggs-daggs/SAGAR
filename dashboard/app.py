@@ -14,6 +14,11 @@ STALE_AFTER_SECONDS = 6
 history = deque(maxlen=60)
 latest = {"temperature": None, "humidity": None, "pressure": None,
           "turbidity_adc": None, "turbidity_voltage": None, "distance": None,
+          "probe_temperature": None, "gps_valid": False,
+          "mpu6050_accel_x": None, "mpu6050_accel_y": None, "mpu6050_accel_z": None,
+          "mpu6050_gyro_x": None, "mpu6050_gyro_y": None, "mpu6050_gyro_z": None,
+          "gps_latitude": None,
+          "gps_longitude": None, "gps_altitude": None, "gps_satellites": None,
           "timestamp": None, "received_at": None}
 lock = threading.Lock()
 
@@ -32,7 +37,11 @@ def detect_port():
 
 
 def valid_reading(data):
-    required = ("temperature", "humidity", "pressure", "turbidity_adc", "turbidity_voltage", "distance")
+    required = ("temperature", "humidity", "pressure", "turbidity_adc", "turbidity_voltage",
+                "distance", "probe_temperature", "gps_valid", "gps_latitude",
+                "gps_longitude", "gps_altitude", "gps_satellites",
+                "mpu6050_accel_x", "mpu6050_accel_y", "mpu6050_accel_z",
+                "mpu6050_gyro_x", "mpu6050_gyro_y", "mpu6050_gyro_z")
     return isinstance(data, dict) and all(key in data for key in required)
 
 
@@ -54,6 +63,7 @@ def serial_reader():
                         continue
                     if not valid_reading(data):
                         continue
+                    data.setdefault("probe_temperature", None)
                     received_at = time.time()
                     data["received_at"] = received_at
                     data["timestamp"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(received_at))

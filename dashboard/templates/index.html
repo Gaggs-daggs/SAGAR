@@ -15,16 +15,21 @@
     <section class="status-strip"><div><span class="label">SYSTEM STATUS</span><strong id="system-status">OFFLINE</strong></div><div><span class="label">ESP32</span><strong id="esp-status">OFFLINE</strong></div><div><span class="label">LAST UPDATE</span><strong id="last-update">Awaiting data</strong></div><div class="mode"><span class="label">SYSTEM MODE</span><strong id="system-mode">NORMAL</strong></div></section>
     <section class="metrics" aria-label="Live sensor readings">
       <article class="metric"><span class="metric-label">AIR TEMPERATURE</span><strong id="temperature">--</strong><span>degrees C</span></article>
+      <article class="metric"><span class="metric-label">WATER PROBE TEMPERATURE</span><strong id="probe-temperature">--</strong><span>DS18B20 / degrees C</span></article>
       <article class="metric"><span class="metric-label">HUMIDITY</span><strong id="humidity">--</strong><span>percent RH</span></article>
       <article class="metric"><span class="metric-label">ATMOSPHERIC PRESSURE</span><strong id="pressure">--</strong><span>hPa</span></article>
       <article class="metric turbidity" id="turbidity-card"><span class="metric-label">TURBIDITY SENSOR READING</span><strong id="turbidity">--</strong><span>raw ADC</span></article>
       <article class="metric"><span class="metric-label">TURBIDITY VOLTAGE</span><strong id="turbidity-voltage">--</strong><span>volts at GPIO34</span></article>
       <article class="metric"><span class="metric-label">DISTANCE / WATER LEVEL</span><strong id="distance">--</strong><span id="distance-unit">cm</span></article>
+        <article class="metric"><span class="metric-label">GPS STATUS</span><strong id="gps-status">NO FIX</strong><span id="gps-satellites">NO DATA</span> satellites</article>
+        <article class="metric"><span class="metric-label">GPS COORDINATES</span><strong id="gps-coordinates">Waiting for satellite fix</strong><span>NEO-6M / latitude, longitude</span></article>
+        <article class="metric"><span class="metric-label">ACCELERATION X / Y / Z</span><strong id="accel-x">--</strong><span id="accel-y">--</span><span id="accel-z">--</span></article>
+        <article class="metric"><span class="metric-label">GYROSCOPE X / Y / Z</span><strong id="gyro-x">--</strong><span id="gyro-y">--</span><span id="gyro-z">--</span></article>
     </section>
     <div class="alert" id="alert" hidden>Significant turbidity change detected. Demonstration alert active.</div>
     <section class="charts">
       <div class="section-heading"><div><p class="kicker">LIVE TELEMETRY</p><h2>Sensor history</h2></div><span>Rolling window / 60 readings</span></div>
-      <div class="chart-grid"><div class="chart"><h3>Temperature <small>degrees C</small></h3><canvas id="temperature-chart"></canvas></div><div class="chart"><h3>Humidity <small>percent</small></h3><canvas id="humidity-chart"></canvas></div><div class="chart"><h3>Pressure <small>hPa</small></h3><canvas id="pressure-chart"></canvas></div><div class="chart"><h3>Turbidity <small>ADC</small></h3><canvas id="turbidity-chart"></canvas></div></div>
+      <div class="chart-grid"><div class="chart"><h3>Temperature <small>degrees C</small></h3><canvas id="temperature-chart"></canvas></div><div class="chart"><h3>Water probe <small>degrees C</small></h3><canvas id="probe-temperature-chart"></canvas></div><div class="chart"><h3>Humidity <small>percent</small></h3><canvas id="humidity-chart"></canvas></div><div class="chart"><h3>Pressure <small>hPa</small></h3><canvas id="pressure-chart"></canvas></div><div class="chart"><h3>Turbidity <small>ADC</small></h3><canvas id="turbidity-chart"></canvas></div><div class="chart"><h3>Acceleration X <small>m/s²</small></h3><canvas id="accel-x-chart"></canvas></div><div class="chart"><h3>Gyro Z <small>rad/s</small></h3><canvas id="gyro-z-chart"></canvas></div></div>
     </section>
     <footer>Wired USB prototype. Turbidity values are comparative raw ADC readings, not calibrated NTU. HC-SR04 is a distance demonstration only.</footer>
   </main>
